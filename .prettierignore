@@ -1,0 +1,7 @@
+dist
+node_modules
+webpack.config.js
+eslint.config.mjs
+README.md
+package.json
+package-lock.json
