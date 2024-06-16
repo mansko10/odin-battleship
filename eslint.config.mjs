@@ -18,4 +18,24 @@ export default [
     ignores: ["node_modules", "dist"],
   },
   eslintConfigPrettier,
+  {
+    rules: {
+      "import/no-named-as-default": "off",
+      "import/no-named-as-default-member": "off",
+      "import/no-extraneous-dependencies": "off",
+      "import/extensions": "off",
+      "no-console": "off",
+      "no-unused-vars": "off"
+    }
+  },
+  {
+    "overrides": [
+      {
+        "files": ["tests/**/*"],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  }
 ];
