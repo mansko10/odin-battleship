@@ -29,7 +29,7 @@ export default class Gameboard {
   canBePlacedHorizontally(row, startingColumn, length) {
     let result = true;
 
-    for (let i = startingColumn; i < length; i++) {
+    for (let i = startingColumn; i < startingColumn + length; i++) {
       if (this.board[row][i] === undefined || this.board[row][i].isOccupied) {
         result = false;
         break;

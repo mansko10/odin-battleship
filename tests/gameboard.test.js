@@ -71,4 +71,14 @@ describe("Gameboard", () => {
       identifier: 0,
     });
   });
+
+  test("Check placeShipHorizontally (4)", () => {
+    const board = new Gameboard();
+    board.placeShipHorizontally(5, "3,6");
+
+    expect(board.board[3][6].isOccupied).toBe(false);
+    expect(board.board[3][7].isOccupied).toBe(false);
+    expect(board.board[3][8].isOccupied).toBe(false);
+    expect(board.board[3][9].isOccupied).toBe(false);
+  });
 });
