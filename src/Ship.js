@@ -1,9 +1,12 @@
+import generateString from "./generateRandomString.js";
+
 export default class Ship {
   constructor(length, startingCoordinate) {
     this.length = length;
     this.timesHit = 0;
     this.hasBeenSunk = false;
     this.startingCoordinate = startingCoordinate;
+    this.identifier = generateString(10);
   }
 
   hit() {
