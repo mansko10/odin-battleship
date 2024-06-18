@@ -48,8 +48,8 @@ export default class Gameboard {
 
     startingCoordinate = startingCoordinate.split(",");
 
-    const row = startingCoordinate[0];
-    const startingColumn = startingCoordinate[1];
+    const row = +startingCoordinate[0];
+    const startingColumn = +startingCoordinate[1];
 
     const canBePlaced = this.canBePlacedHorizontally(
       row,
@@ -59,7 +59,8 @@ export default class Gameboard {
 
     if (!canBePlaced) return;
 
-    for (let i = startingColumn; i < length; i++) {
+    for (let i = startingColumn; i < startingColumn + length; i++) {
+      /*^^^^^^^^^^^^^^ LENGTH*/
       this.board[row][i].isOccupied = true;
       this.board[row][i].occupier = ship.identifier;
     }
