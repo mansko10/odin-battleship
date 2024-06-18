@@ -26,6 +26,19 @@ export default class Gameboard {
     this.ships = [];
   }
 
+  canBePlacedHorizontally(row, startingColumn, length) {
+    let result = true;
+
+    for (let i = startingColumn; i < length; i++) {
+      if (this.board[row][i] === undefined || this.board[row][i].isOccupied) {
+        result = false;
+        break;
+      }
+    }
+
+    return result;
+  }
+
   placeShipHorizontally(
     length,
     startingCoordinate,
@@ -37,6 +50,14 @@ export default class Gameboard {
 
     const row = startingCoordinate[0];
     const startingColumn = startingCoordinate[1];
+
+    const canBePlaced = this.canBePlacedHorizontally(
+      row,
+      startingColumn,
+      length,
+    );
+
+    if (!canBePlaced) return;
 
     for (let i = startingColumn; i < length; i++) {
       this.board[row][i].isOccupied = true;
