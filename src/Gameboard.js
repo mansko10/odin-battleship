@@ -10,6 +10,7 @@ function createBoard() {
         coordinates: `${i},${j}`,
         isOccupied: false,
         isHit: false,
+        occupier: null,
       };
     }
   }
