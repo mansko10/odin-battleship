@@ -1,9 +1,9 @@
 export default class Ship {
-  constructor(length, coordinates) {
+  constructor(length, startingCoordinate) {
     this.length = length;
     this.timesHit = 0;
     this.hasBeenSunk = false;
-    this.coordinates = coordinates;
+    this.startingCoordinate = startingCoordinate;
   }
 
   hit() {

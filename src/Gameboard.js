@@ -1,3 +1,5 @@
+import Ship from "./Ship.js";
+
 function createBoard() {
   const rows = 10;
   const columns = 10;
@@ -17,7 +19,3 @@ function createBoard() {
 
   return board;
 }
-
-const board = createBoard();
-
-console.log(board);
