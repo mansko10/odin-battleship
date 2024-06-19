@@ -67,4 +67,45 @@ export default class Gameboard {
 
     this.ships.push(ship);
   }
+
+  canBePlacedVertically(startingRow, column, length) {
+    let result = true;
+
+    for (let i = startingRow; i < startingRow + length; i++) {
+      if (
+        this.board[i][column] === undefined ||
+        this.board[i][column].isOccupied
+      ) {
+        result = false;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  placeShipVertically(
+    length,
+    startingCoordinate,
+    identifier = this.ships.length,
+  ) {
+    const ship = new Ship(length, startingCoordinate, identifier);
+
+    startingCoordinate = startingCoordinate.split(",");
+
+    const startingRow = +startingCoordinate[0];
+    const column = +startingCoordinate[1];
+
+    const canBePlaced = this.canBePlacedVertically(startingRow, column, length);
+
+    if (!canBePlaced) return;
+
+    for (let i = startingRow; i < startingRow + length; i++) {
+      /*^^^^^^^^^^^^^^ LENGTH*/
+      this.board[i][column].isOccupied = true;
+      this.board[i][column].occupier = ship.identifier;
+    }
+
+    this.ships.push(ship);
+  }
 }
