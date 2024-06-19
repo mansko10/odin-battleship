@@ -1,4 +1,3 @@
-import { experiments } from "webpack";
 import Gameboard from "../src/Gameboard.js";
 
 describe("Check placeShipHorizontally", () => {
@@ -108,7 +107,123 @@ describe("Check placeShipHorizontally", () => {
     board.placeShipHorizontally(4, "0,4");
     board.placeShipHorizontally(3, "3,4");
     board.placeShipHorizontally(5, "5,4");
-    board.placeShipHorizontally(5, "3,2");
+    board.placeShipHorizontally(5, "3,2"); //<<< This one denied to prevent putting ship over ship
+
+    expect(board.ships.length).toBe(3);
+  });
+});
+
+describe("Check placeShipVertically", () => {
+  test("Check placeShipVertically (5, 0,0)", () => {
+    const board = new Gameboard();
+    board.placeShipVertically(5, "0,0");
+
+    expect(board.board[0][0].isOccupied).toBe(true);
+    expect(board.board[1][0].isOccupied).toBe(true);
+    expect(board.board[2][0].isOccupied).toBe(true);
+    expect(board.board[3][0].isOccupied).toBe(true);
+    expect(board.board[4][0].isOccupied).toBe(true);
+
+    expect(board.board[0][0].occupier).toBe(0);
+    expect(board.board[1][0].occupier).toBe(0);
+    expect(board.board[2][0].occupier).toBe(0);
+    expect(board.board[3][0].occupier).toBe(0);
+    expect(board.board[4][0].occupier).toBe(0);
+
+    expect(board.ships[0]).toEqual({
+      length: 5,
+      timesHit: 0,
+      hasBeenSunk: false,
+      startingCoordinate: "0,0",
+      identifier: 0,
+    });
+  });
+
+  test("Check placeShipVertically (5, 0,5)", () => {
+    const board = new Gameboard();
+    board.placeShipVertically(5, "0,5");
+
+    expect(board.board[0][5].isOccupied).toBe(true);
+    expect(board.board[1][5].isOccupied).toBe(true);
+    expect(board.board[2][5].isOccupied).toBe(true);
+    expect(board.board[3][5].isOccupied).toBe(true);
+    expect(board.board[4][5].isOccupied).toBe(true);
+
+    expect(board.board[0][5].occupier).toBe(0);
+    expect(board.board[1][5].occupier).toBe(0);
+    expect(board.board[2][5].occupier).toBe(0);
+    expect(board.board[3][5].occupier).toBe(0);
+    expect(board.board[4][5].occupier).toBe(0);
+
+    expect(board.ships[0]).toEqual({
+      length: 5,
+      timesHit: 0,
+      hasBeenSunk: false,
+      startingCoordinate: "0,5",
+      identifier: 0,
+    });
+  });
+
+  test("Check placeShipVertically (3, 7,5)", () => {
+    const board = new Gameboard();
+    board.placeShipVertically(3, "7,5");
+
+    expect(board.board[7][5].isOccupied).toBe(true);
+    expect(board.board[8][5].isOccupied).toBe(true);
+    expect(board.board[9][5].isOccupied).toBe(true);
+
+    expect(board.board[7][5].occupier).toBe(0);
+    expect(board.board[8][5].occupier).toBe(0);
+    expect(board.board[9][5].occupier).toBe(0);
+
+    expect(board.ships[0]).toEqual({
+      length: 3,
+      timesHit: 0,
+      hasBeenSunk: false,
+      startingCoordinate: "7,5",
+      identifier: 0,
+    });
+  });
+
+  test("Check if denies out of board placement (5, 7,5)", () => {
+    const board = new Gameboard();
+    board.placeShipVertically(5, "7,5");
+
+    expect(board.board[7][5].isOccupied).toBe(false);
+    expect(board.board[8][5].isOccupied).toBe(false);
+    expect(board.board[9][5].isOccupied).toBe(false);
+  });
+
+  test("Check if denies placing over other ships", () => {
+    const board = new Gameboard();
+
+    board.placeShipVertically(5, "3,2");
+    board.placeShipVertically(4, "1,2");
+
+    expect(board.board[3][2].isOccupied).toBe(true);
+    expect(board.board[4][2].isOccupied).toBe(true);
+    expect(board.board[5][2].isOccupied).toBe(true);
+    expect(board.board[6][2].isOccupied).toBe(true);
+    expect(board.board[7][2].isOccupied).toBe(true);
+
+    expect(board.board[3][2].occupier).toBe(0);
+    expect(board.board[4][2].occupier).toBe(0);
+    expect(board.board[5][2].occupier).toBe(0);
+    expect(board.board[6][2].occupier).toBe(0);
+    expect(board.board[7][2].occupier).toBe(0);
+
+    expect(board.board[1][2].isOccupied).toBe(false);
+  });
+
+  test("Check if can place more than 1 ship", () => {
+    const board = new Gameboard();
+
+    board.placeShipHorizontally(5, "2,5");
+    board.placeShipHorizontally(4, "6,2");
+    board.placeShipHorizontally(3, "2,8");
+    board.placeShipHorizontally(4, "5,5"); //<<< This one denied to prevent putting ship over ship
+
+    expect(board.board[7][5].isOccupied).toBe(false);
 
     expect(board.ships.length).toBe(3);
   });

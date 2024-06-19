@@ -72,10 +72,7 @@ export default class Gameboard {
     let result = true;
 
     for (let i = startingRow; i < startingRow + length; i++) {
-      if (
-        this.board[i][column] === undefined ||
-        this.board[i][column].isOccupied
-      ) {
+      if (this.board[i] === undefined || this.board[i][column].isOccupied) {
         result = false;
         break;
       }
