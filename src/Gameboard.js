@@ -106,11 +106,11 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
-  placeShip(row, column, length, axis) {
+  placeShip(length, startingCoordinate, axis) {
     if (axis === "horizontal") {
-      this.placeShipHorizontally(row, column, length);
+      this.placeShipHorizontally(length, startingCoordinate);
     } else if (axis === "vertical") {
-      this.placeShipHorizontally(row, column, length);
+      this.placeShipVertically(length, startingCoordinate);
     }
   }
 }
