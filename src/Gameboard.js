@@ -26,7 +26,7 @@ export default class Gameboard {
     this.ships = [];
   }
 
-  canBePlacedHorizontally(row, startingColumn, length) {
+  #canBePlacedHorizontally(row, startingColumn, length) {
     let result = true;
 
     for (let i = startingColumn; i < startingColumn + length; i++) {
@@ -39,7 +39,7 @@ export default class Gameboard {
     return result;
   }
 
-  placeShipHorizontally(
+  #placeShipHorizontally(
     length,
     startingCoordinate,
     identifier = this.ships.length,
@@ -51,7 +51,7 @@ export default class Gameboard {
     const row = +startingCoordinate[0];
     const startingColumn = +startingCoordinate[1];
 
-    const canBePlaced = this.canBePlacedHorizontally(
+    const canBePlaced = this.#canBePlacedHorizontally(
       row,
       startingColumn,
       length,
@@ -68,7 +68,7 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
-  canBePlacedVertically(startingRow, column, length) {
+  #canBePlacedVertically(startingRow, column, length) {
     let result = true;
 
     for (let i = startingRow; i < startingRow + length; i++) {
@@ -81,7 +81,7 @@ export default class Gameboard {
     return result;
   }
 
-  placeShipVertically(
+  #placeShipVertically(
     length,
     startingCoordinate,
     identifier = this.ships.length,
@@ -93,7 +93,11 @@ export default class Gameboard {
     const startingRow = +startingCoordinate[0];
     const column = +startingCoordinate[1];
 
-    const canBePlaced = this.canBePlacedVertically(startingRow, column, length);
+    const canBePlaced = this.#canBePlacedVertically(
+      startingRow,
+      column,
+      length,
+    );
 
     if (!canBePlaced) return;
 
@@ -108,9 +112,9 @@ export default class Gameboard {
 
   placeShip(length, startingCoordinate, axis) {
     if (axis === "horizontal") {
-      this.placeShipHorizontally(length, startingCoordinate);
+      this.#placeShipHorizontally(length, startingCoordinate);
     } else if (axis === "vertical") {
-      this.placeShipVertically(length, startingCoordinate);
+      this.#placeShipVertically(length, startingCoordinate);
     }
   }
 }
