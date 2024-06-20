@@ -155,4 +155,21 @@ export default class Gameboard {
       this.ships[indexOfOccupier].hit();
     }
   }
+
+  checkAllSunk() {
+    let shipsSunk = 0;
+    let totalShips = this.ships.length;
+
+    this.ships.forEach((ship) => {
+      if (ship.hasBeenSunk === true) {
+        shipsSunk += 1;
+      }
+    });
+
+    if (shipsSunk === totalShips) {
+      return true;
+    }
+
+    return false;
+  }
 }

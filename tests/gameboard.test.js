@@ -75,3 +75,35 @@ describe("Check receiveAttack", () => {
     expect(board.cellsHit.length).toBe(1);
   });
 });
+
+describe("Check checkAllSunk", () => {
+  test("Check checkAllsunk", () => {
+    const gameboard = new Gameboard();
+
+    gameboard.placeShip(3, "3,3", "horizontal");
+    gameboard.placeShip(2, "6,7", "vertical");
+    gameboard.placeShip(5, "8,1", "horizontal");
+    gameboard.placeShip(4, "2,1", "vertical");
+
+    gameboard.receiveAttack("2,1");
+    gameboard.receiveAttack("3,1");
+    gameboard.receiveAttack("4,1");
+    gameboard.receiveAttack("5,1");
+
+    gameboard.receiveAttack("8,1");
+    gameboard.receiveAttack("8,2");
+    gameboard.receiveAttack("8,3");
+    gameboard.receiveAttack("8,4");
+    gameboard.receiveAttack("8,5");
+
+    gameboard.receiveAttack("6,7");
+    gameboard.receiveAttack("7,7");
+
+    expect(gameboard.checkAllSunk()).toBe(false);
+    gameboard.receiveAttack("3,3");
+    gameboard.receiveAttack("3,4");
+    gameboard.receiveAttack("3,5");
+
+    expect(gameboard.checkAllSunk()).toBe(true);
+  });
+});
