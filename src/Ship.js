@@ -9,6 +9,7 @@ export default class Ship {
 
   hit() {
     this.timesHit += 1;
+    this.isSunk();
   }
 
   isSunk() {

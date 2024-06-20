@@ -30,3 +30,48 @@ describe("Check placeShip", () => {
     expect(board.board[8][9].occupier).toBe(4);
   });
 });
+
+describe("Check receiveAttack", () => {
+  test("Check if board cell and ship are hit (1)", () => {
+    const board = new Gameboard();
+
+    board.placeShip(5, "0,0", "horizontal");
+
+    board.receiveAttack("0,0");
+    board.receiveAttack("0,1");
+    board.receiveAttack("0,2");
+    board.receiveAttack("0,3");
+    board.receiveAttack("0,4");
+
+    //Checks if board cells are hit
+    expect(board.board[0][0].isHit).toBe(true);
+    expect(board.board[0][1].isHit).toBe(true);
+    expect(board.board[0][2].isHit).toBe(true);
+    expect(board.board[0][2].isHit).toBe(true);
+    expect(board.board[0][4].isHit).toBe(true);
+
+    //Check if the cell that is hit is recorded and saved in an array
+    expect(board.cellsHit[0]).toBe("0,0");
+    expect(board.cellsHit[1]).toBe("0,1");
+    expect(board.cellsHit[2]).toBe("0,2");
+    expect(board.cellsHit[3]).toBe("0,3");
+    expect(board.cellsHit[4]).toBe("0,4");
+
+    //Check if the any ship in the cell is hit
+    expect(board.ships[0].timesHit).toBe(5);
+
+    //Check if ship is sunk
+    expect(board.ships[0].hasBeenSunk).toBe(true);
+  });
+
+  test("Check if prevents more than 1 hit", () => {
+    const board = new Gameboard();
+
+    board.placeShip(5, "0,0", "horizontal");
+
+    board.receiveAttack("0,0");
+    board.receiveAttack("0,0"); //Won't count
+
+    expect(board.cellsHit.length).toBe(1);
+  });
+});

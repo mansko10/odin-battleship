@@ -24,6 +24,7 @@ export default class Gameboard {
   constructor() {
     this.board = createBoard();
     this.ships = [];
+    this.cellsHit = [];
   }
 
   #canBePlacedHorizontally(row, startingColumn, length) {
@@ -115,6 +116,43 @@ export default class Gameboard {
       this.#placeShipHorizontally(length, startingCoordinate);
     } else if (axis === "vertical") {
       this.#placeShipVertically(length, startingCoordinate);
+    }
+  }
+
+  updateCellsHit() {
+    const rows = 10;
+    const columns = 10;
+
+    this.cellsHit = [];
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        if (this.board[i][j].isHit === true) {
+          this.cellsHit.push(this.board[i][j].coordinates);
+        }
+      }
+    }
+  }
+
+  receiveAttack(coordinates) {
+    coordinates = coordinates.split(",");
+    const row = coordinates[0];
+    const column = coordinates[1];
+
+    if (this.board[row][column].isHit === true) return;
+
+    this.board[row][column].isHit = true;
+    this.updateCellsHit();
+    // this.cellsHit.push(coordinates.join(",")); TRY MAKING THE cellsHit function instead of doing this
+
+    if (this.board[row][column].isOccupied === true) {
+      const occupier = this.board[row][column].occupier;
+
+      const indexOfOccupier = this.ships.findIndex((ship) => {
+        return ship.identifier === occupier;
+      });
+
+      this.ships[indexOfOccupier].hit();
     }
   }
 }
