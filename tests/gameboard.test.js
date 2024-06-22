@@ -1,4 +1,4 @@
-import Gameboard from "../src/Gameboard.js";
+import Gameboard from "../src/classes/Gameboard.js";
 
 describe("Check placeShip", () => {
   test("placeShip", () => {
