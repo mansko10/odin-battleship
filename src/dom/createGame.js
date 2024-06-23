@@ -1,5 +1,5 @@
-import htmlTemplate from "./htmlTemplate.js";
-import "./style.css";
+import htmlTemplate from "../htmlTemplate.js";
+import "../style.css";
 
 export default function createGame(document, player, computer) {
   player.gameboard.placeShip(5, "0,0", "horizontal");
@@ -15,7 +15,7 @@ export default function createGame(document, player, computer) {
   computer.gameboard.placeShip(2, "9,2", "horizontal");
 
   const body = document.querySelector("body");
-  body.innerHTML += htmlTemplate;
+  body.innerHTML = htmlTemplate;
 
   const playerBoard = document.querySelector(".player.board");
   const computerBoard = document.querySelector(".computer.board");
@@ -42,7 +42,7 @@ export default function createGame(document, player, computer) {
       cell.style.height = "40px";
       cell.dataset.coordinates = `${rowIndex},${columnIndex}`;
 
-      if (column.isOccupied) {
+      if (column.isOccupied && column.isHit) {
         cell.style.backgroundColor = "midnightBlue";
       }
 
