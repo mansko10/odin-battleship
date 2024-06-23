@@ -1,9 +1,19 @@
-import createGame from "./createGame.js";
+import createGame from "./dom/createGame.js";
 import Player from "./classes/Player.js";
 
 const player = new Player("mannan");
 const computer = new Player();
 
-createGame(document, player, computer);
+player.gameboard.placeShip(5, "0,0", "horizontal");
+player.gameboard.placeShip(4, "3,2", "vertical");
+player.gameboard.placeShip(3, "7,6", "horizontal");
+player.gameboard.placeShip(3, "1,8", "vertical");
+player.gameboard.placeShip(2, "9,2", "horizontal");
 
-console.log(player);
+computer.gameboard.placeShip(5, "0,0", "horizontal");
+computer.gameboard.placeShip(4, "3,2", "vertical");
+computer.gameboard.placeShip(3, "7,6", "horizontal");
+computer.gameboard.placeShip(3, "1,8", "vertical");
+computer.gameboard.placeShip(2, "9,2", "horizontal");
+
+createGame(document, player, computer);
