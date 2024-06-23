@@ -16,4 +16,4 @@ computer.gameboard.placeShip(3, "7,6", "horizontal");
 computer.gameboard.placeShip(3, "1,8", "vertical");
 computer.gameboard.placeShip(2, "9,2", "horizontal");
 
-createGame(document, player, computer);
+createGame(player, computer);

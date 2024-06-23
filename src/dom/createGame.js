@@ -1,7 +1,7 @@
 import htmlTemplate from "../htmlTemplate.js";
 import "../style.css";
 
-export default function createGame(document, player, computer) {
+export default function createGame(player, computer) {
   const body = document.querySelector("body");
   body.innerHTML = htmlTemplate;
 
