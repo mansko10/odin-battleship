@@ -1,5 +1,6 @@
-import createGame from "./dom/createGame.js";
+// import createGame from "./dom/createGame.js";
 import Player from "./classes/Player.js";
+import "./style.css";
 
 const player = new Player("mannan");
 const computer = new Player();
@@ -16,4 +17,4 @@ computer.gameboard.placeShip(3, "7,6", "horizontal");
 computer.gameboard.placeShip(3, "1,8", "vertical");
 computer.gameboard.placeShip(2, "9,2", "horizontal");
 
-createGame(player, computer);
+// createGame(player, computer);
