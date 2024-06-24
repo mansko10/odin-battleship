@@ -1,10 +1,4 @@
-import htmlTemplate from "../htmlTemplate.js";
-import "../style.css";
-
-export default function createGame(player, computer) {
-  const body = document.querySelector("body");
-  body.innerHTML = htmlTemplate;
-
+export default function createDOMBoards(player, computer) {
   const playerBoard = document.querySelector(".player.board");
   const computerBoard = document.querySelector(".computer.board");
 
