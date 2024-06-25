@@ -1,5 +1,6 @@
-import createDOMBoards from "./dom/createDOMBoards.js";
 import Player from "./classes/Player.js";
+import displayPlayerBoard from "./dom/displayPlayerBoard.js";
+import displayComputerBoard from "./dom/displayComputerBoard.js";
 import "./style.css";
 
 const player = new Player("mannan");
@@ -17,4 +18,5 @@ computer.gameboard.placeShip(3, "7,6", "horizontal");
 computer.gameboard.placeShip(3, "1,8", "vertical");
 computer.gameboard.placeShip(2, "9,2", "horizontal");
 
-createDOMBoards(player, computer);
+displayPlayerBoard(player);
+displayComputerBoard(computer);
