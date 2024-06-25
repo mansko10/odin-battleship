@@ -1,4 +1,4 @@
-// import createGame from "./dom/createGame.js";
+import createDOMBoards from "./dom/createDOMBoards.js";
 import Player from "./classes/Player.js";
 import "./style.css";
 
@@ -17,4 +17,4 @@ computer.gameboard.placeShip(3, "7,6", "horizontal");
 computer.gameboard.placeShip(3, "1,8", "vertical");
 computer.gameboard.placeShip(2, "9,2", "horizontal");
 
-// createGame(player, computer);
+createDOMBoards(player, computer);

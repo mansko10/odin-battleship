@@ -2,6 +2,9 @@ export default function createDOMBoards(player, computer) {
   const playerBoard = document.querySelector(".player.board");
   const computerBoard = document.querySelector(".computer.board");
 
+  playerBoard.innerHTML = "";
+  computerBoard.innerHTML = "";
+
   player.gameboard.board.forEach((row, rowIndex) => {
     row.forEach((column, columnIndex) => {
       const cell = document.createElement("div");
