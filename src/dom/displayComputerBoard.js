@@ -12,6 +12,8 @@ export default function displayComputerBoard(computer) {
 
       if (column.isOccupied && column.isHit) {
         cell.style.backgroundColor = "midnightBlue";
+      } else if (!column.isOccupied && column.isHit) {
+        cell.style.backgroundColor = "gray";
       }
 
       computerBoard.appendChild(cell);

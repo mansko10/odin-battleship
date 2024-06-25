@@ -10,7 +10,13 @@ export default function displayPlayerBoard(player) {
       cell.style.height = "40px";
       cell.dataset.coordinates = `${rowIndex},${columnIndex}`;
 
-      if (column.isOccupied) {
+      if (column.isOccupied && column.isHit) {
+        cell.style.backgroundColor = "midnightBlue";
+        cell.style.color = "yellow";
+        cell.textContent = "HIT";
+      } else if (!column.isOccupied && column.isHit) {
+        cell.style.backgroundColor = "gray";
+      } else if (column.isOccupied) {
         cell.style.backgroundColor = "midnightBlue";
       }
 
