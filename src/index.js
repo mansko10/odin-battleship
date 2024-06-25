@@ -1,6 +1,7 @@
 import Player from "./classes/Player.js";
 import displayPlayerBoard from "./dom/displayPlayerBoard.js";
 import displayComputerBoard from "./dom/displayComputerBoard.js";
+import play from "./dom/play.js";
 import "./style.css";
 
 const player = new Player("mannan");
@@ -20,3 +21,5 @@ computer.gameboard.placeShip(2, "9,2", "horizontal");
 
 displayPlayerBoard(player);
 displayComputerBoard(computer);
+
+play(player, computer);
