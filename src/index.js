@@ -2,7 +2,7 @@ import Player from "./classes/Player.js";
 import displayPlayerBoard from "./dom/displayPlayerBoard.js";
 import displayComputerBoard from "./dom/displayComputerBoard.js";
 import play from "./dom/play.js";
-import "./style.css";
+import "./styles/game.css";
 
 const player = new Player("mannan");
 const computer = new Player();
