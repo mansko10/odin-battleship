@@ -1,6 +1,7 @@
 import displayComputerBoard from "./displayComputerBoard.js";
 import displayPlayerBoard from "./displayPlayerBoard.js";
 import generateCoordinate from "./generateCoordinate.js";
+import endGame from "./endGame.js";
 
 export default function play(player, computer) {
   let turn = "player";
@@ -13,6 +14,11 @@ export default function play(player, computer) {
       player.gameboard.receiveAttack(coordinates);
       displayPlayerBoard(player);
 
+      if (player.gameboard.checkAllSunk()) {
+        endGame(computer);
+        return;
+      }
+
       turn = "player";
       computerBoard.addEventListener("click", attackComputerEvent);
     }
@@ -24,6 +30,11 @@ export default function play(player, computer) {
       if (computer.gameboard.cellsHit.includes(coordinates)) return;
       computer.gameboard.receiveAttack(coordinates);
       displayComputerBoard(computer);
+
+      if (computer.gameboard.checkAllSunk()) {
+        endGame(player);
+        return;
+      }
 
       turn = "computer";
       computerBoard.removeEventListener("click", attackComputerEvent);
