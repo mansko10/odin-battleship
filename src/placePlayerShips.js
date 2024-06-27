@@ -1,4 +1,5 @@
 import "./styles/modal.css";
+import startGame from "./startGame.js";
 
 export default function placePlayerShips() {
   const body = document.querySelector("body");
@@ -147,8 +148,9 @@ export default function placePlayerShips() {
 
         if (shipLengths.length === 0) {
           dialog.close();
+          dialog.remove();
 
-          return objects;
+          startGame(objects);
         }
       });
     });
