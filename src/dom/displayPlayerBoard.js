@@ -10,7 +10,12 @@ export default function displayPlayerBoard(player) {
       cell.style.height = "40px";
       cell.dataset.coordinates = `${rowIndex},${columnIndex}`;
 
-      if (column.isOccupied && column.isHit) {
+      if (
+        column.isOccupied &&
+        player.gameboard.ships[column.occupier].isSunk()
+      ) {
+        cell.style.backgroundColor = "yellow";
+      } else if (column.isOccupied && column.isHit) {
         cell.style.backgroundColor = "midnightBlue";
         cell.style.color = "yellow";
         cell.textContent = "HIT";
