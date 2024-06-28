@@ -143,7 +143,7 @@ export default class Gameboard {
 
     this.board[row][column].isHit = true;
     // this.updateCellsHit();
-    this.cellsHit.push(coordinates.join(",")); //TRY MAKING THE cellsHit function instead of doing this
+    this.cellsHit.push(coordinates.join(","));
 
     if (this.board[row][column].isOccupied === true) {
       const occupier = this.board[row][column].occupier;
