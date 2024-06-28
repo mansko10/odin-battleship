@@ -142,8 +142,8 @@ export default class Gameboard {
     if (this.board[row][column].isHit === true) return;
 
     this.board[row][column].isHit = true;
-    this.updateCellsHit();
-    // this.cellsHit.push(coordinates.join(",")); TRY MAKING THE cellsHit function instead of doing this
+    // this.updateCellsHit();
+    this.cellsHit.push(coordinates.join(",")); //TRY MAKING THE cellsHit function instead of doing this
 
     if (this.board[row][column].isOccupied === true) {
       const occupier = this.board[row][column].occupier;
