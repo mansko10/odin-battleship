@@ -45,6 +45,7 @@ export default function placePlayerShips() {
     const cells = document.querySelectorAll(".placeShip.board .cell");
 
     const shipLengths = [5, 4, 3, 3, 2];
+    // const shipLengths = [5, 5, 5, 5];
     const objects = [];
 
     cells.forEach((cell) => {
