@@ -6,13 +6,8 @@ let axis;
 
 export default function generateCoordinate(player) {
   if (adjacents.length > 0) {
-    //pick from adjacents
-    const lastAdjacent = adjacents[adjacents.length - 1];
-    const lastAdjacentSplit = lastAdjacent.split(",");
-    const lastAdjacentSplitRow = +lastAdjacentSplit[0];
-    const lastAdjacentSplitColumn = +lastAdjacentSplit[1];
-
     if (lastOccupied.length >= 2) {
+      console.log(lastOccupied);
       let first = lastOccupied[0]; // format is 'a,b'
       let second = lastOccupied[1]; //format is 'c,d'
 
@@ -26,12 +21,41 @@ export default function generateCoordinate(player) {
 
       if (rowOfFirst === rowOfSecond) {
         console.log("ITS HORIZONTAL", rowOfFirst, rowOfSecond);
-        axis = ["horizontal", rowOfFirst];
+
+        for (let i = 0; i < adjacents.length; i++) {
+          let adjacent = adjacents[i];
+          adjacent = adjacent.split(",");
+
+          if (adjacent[0] !== rowOfFirst) {
+            console.log("selective axis horizontal");
+            adjacents.splice(i, 1);
+            i--;
+          }
+        }
       } else if (colOfFirst === colOfSecond) {
         console.log("ITS VERTICAL");
-        axis = ["vertical", colOfFirst];
+        console.log(adjacents, "ADJACENTS BEFORE SPLICE");
+
+        for (let i = 0; i < adjacents.length; i++) {
+          let adjacent = adjacents[i];
+          adjacent = adjacent.split(",");
+
+          if (adjacent[1] !== colOfFirst) {
+            console.log("selective axis vertical");
+            adjacents.splice(i, 1);
+            i--;
+          }
+        }
+
+        console.log(adjacents, "ADJACENTS AFTER SPLICE");
       }
     }
+
+    //pick from adjacents
+    const lastAdjacent = adjacents[adjacents.length - 1];
+    const lastAdjacentSplit = lastAdjacent.split(",");
+    const lastAdjacentSplitRow = +lastAdjacentSplit[0];
+    const lastAdjacentSplitColumn = +lastAdjacentSplit[1];
 
     //prettier-ignore
     if (player.gameboard.board[lastAdjacentSplitRow][lastAdjacentSplitColumn].isOccupied) {
@@ -43,33 +67,7 @@ export default function generateCoordinate(player) {
       let additionalAdjacent = genAdjacent(lastAdjacentSplitRow, lastAdjacentSplitColumn, player);
       adjacents.pop();
       adjacents = adjacents.concat(additionalAdjacent);
-
-      if (axis) {
-        if (axis[0] === 'horizontal') {
-          for (let i = 0; i < adjacents.length; i++) {
-            let adjacent = adjacents[i];
-            adjacent = adjacent.split(',');
-            
-            if (adjacent[0] !== axis[1]) {
-              console.log('selective axis horizontal');
-              adjacents.splice(i, 1);
-              i--;
-            }
-          }
-        } else if (axis[0] === 'vertical') {
-          for (let i = 0; i < adjacents.length; i++) {
-            let adjacent = adjacents[i];
-            adjacent = adjacent.split(',');
-            
-            if (adjacent[1] !== axis[1]) {
-              console.log('selective axis vertical');
-              adjacents.splice(i, 1);
-              i--;
-            }
-          }
-        }
-      }
-      
+  
       //IsSunk won't work (due to return being later) so came up with this way. The goal is to prevent hitting adjacent cells of already sunk ship.
       if (shipInBoard.length - shipInBoard.timesHit === 1) {
         adjacents = [];
