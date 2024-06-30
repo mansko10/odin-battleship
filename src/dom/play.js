@@ -12,36 +12,73 @@ export default function play(player, computer) {
   const computerBoard = document.querySelector(".board.computer");
 
   function attackPlayer() {
-    if (turn === "computer") {
-      const coordinates = generateCoordinate(player);
-      player.gameboard.receiveAttack(coordinates);
-      displayPlayerBoard(player);
+    setTimeout(() => {
+      if (turn === "computer") {
+        const cannonFireSound = new Audio(cannonFire);
+        cannonFireSound.play();
+        const coordinates = generateCoordinate(player);
 
-      if (player.gameboard.checkAllSunk()) {
-        endGame(computer);
-        return;
+        setTimeout(() => {
+          const splitCoordinates = coordinates.split(",");
+          player.gameboard.receiveAttack(coordinates);
+
+          if (
+            player.gameboard.board[splitCoordinates[0]][splitCoordinates[1]]
+              .isOccupied
+          ) {
+            const explosionSound = new Audio(explosion);
+            explosionSound.play();
+          } else {
+            const waterSplashSound = new Audio(waterSplash);
+            waterSplashSound.play();
+          }
+          displayPlayerBoard(player);
+
+          if (player.gameboard.checkAllSunk()) {
+            endGame(computer);
+            return;
+          }
+
+          turn = "player";
+          computerBoard.addEventListener("click", attackComputerEvent);
+        }, 3000);
       }
-
-      turn = "player";
-      computerBoard.addEventListener("click", attackComputerEvent);
-    }
+    }, 3000);
   }
 
   function attackComputerEvent(e) {
     if (turn === "player") {
-      const coordinates = e.target.dataset.coordinates;
-      if (computer.gameboard.cellsHit.includes(coordinates)) return;
-      computer.gameboard.receiveAttack(coordinates);
-      displayComputerBoard(computer);
-
-      if (computer.gameboard.checkAllSunk()) {
-        endGame(player);
-        return;
-      }
-
-      turn = "computer";
+      const cannonFireSound = new Audio(cannonFire);
       computerBoard.removeEventListener("click", attackComputerEvent);
-      attackPlayer();
+      cannonFireSound.play();
+      setTimeout(() => {
+        const coordinates = e.target.dataset.coordinates;
+        const splitCoordinates = coordinates.split(",");
+        if (computer.gameboard.cellsHit.includes(coordinates)) return;
+        computer.gameboard.receiveAttack(coordinates);
+
+        if (
+          computer.gameboard.board[splitCoordinates[0]][splitCoordinates[1]]
+            .isOccupied
+        ) {
+          const explosionSound = new Audio(explosion);
+          explosionSound.play();
+        } else {
+          const waterSplashSound = new Audio(waterSplash);
+          waterSplashSound.play();
+        }
+
+        displayComputerBoard(computer);
+
+        if (computer.gameboard.checkAllSunk()) {
+          endGame(player);
+          return;
+        }
+
+        turn = "computer";
+        // computerBoard.addEventListener("click", attackComputerEvent);
+        attackPlayer();
+      }, 2000);
     }
   }
 
