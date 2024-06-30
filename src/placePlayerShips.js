@@ -1,5 +1,6 @@
 import "./styles/modal.css";
 import startGame from "./startGame.js";
+import updateShipPlaceName from "./updateShipName.js";
 
 export default function placePlayerShips() {
   const body = document.querySelector("body");
@@ -9,6 +10,7 @@ export default function placePlayerShips() {
 
     dialog.innerHTML = `<button>Change to vertical</button><div>
         <h3>Player</h3>
+        <h3>Please place your <span id="shipName"></span></h3>
         <div class="placeShip board"></div>
       </div>`;
 
@@ -27,9 +29,8 @@ export default function placePlayerShips() {
         button.textContent = "Change to vertical";
         axis = "horizontal";
       }
-
-      console.log(axis);
     });
+
     const placeShipBoard = document.querySelector(".placeShip.board");
 
     for (let i = 0; i < 10; i++) {
@@ -44,8 +45,32 @@ export default function placePlayerShips() {
 
     const cells = document.querySelectorAll(".placeShip.board .cell");
 
-    const shipLengths = [5, 4, 3, 3, 2];
-    // const shipLengths = [5, 5, 5, 5];
+    // const shipLengths = [5, 4, 3, 3, 2];
+
+    const shipLengths = [
+      {
+        name: "Carrier",
+        length: 5,
+      },
+      {
+        name: "Battleship",
+        length: 4,
+      },
+      {
+        name: "Cruiser",
+        length: 3,
+      },
+      {
+        name: "Submarine",
+        length: 3,
+      },
+      {
+        name: "Destroyer",
+        length: 2,
+      },
+    ];
+
+    updateShipPlaceName(shipLengths);
     const objects = [];
 
     cells.forEach((cell) => {
@@ -56,12 +81,12 @@ export default function placePlayerShips() {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipLengths[0]; i++) {
+          for (let i = column; i < column + shipLengths[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipLengths[0]; i++) {
+          for (let i = row; i < row + shipLengths[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -82,12 +107,12 @@ export default function placePlayerShips() {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipLengths[0]; i++) {
+          for (let i = column; i < column + shipLengths[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipLengths[0]; i++) {
+          for (let i = row; i < row + shipLengths[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -108,12 +133,12 @@ export default function placePlayerShips() {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipLengths[0]; i++) {
+          for (let i = column; i < column + shipLengths[0].length; i++) {
             if (i > 9) return;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipLengths[0]; i++) {
+          for (let i = row; i < row + shipLengths[0].length; i++) {
             if (i > 9) return;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -138,7 +163,7 @@ export default function placePlayerShips() {
         });
 
         const obj = {
-          length: shipLengths[0],
+          length: shipLengths[0].length,
           startingCoordinate: cell.dataset.coordinates,
           axis: axis,
         };
@@ -146,6 +171,7 @@ export default function placePlayerShips() {
         objects.push(obj);
 
         shipLengths.shift();
+        updateShipPlaceName(shipLengths);
 
         if (shipLengths.length === 0) {
           dialog.close();
