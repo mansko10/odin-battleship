@@ -1,6 +1,6 @@
-import "./styles/modal.css";
-import startGame from "./startGame.js";
-import updateShipPlaceName from "./updateShipName.js";
+import "../styles/modal.css";
+import startGame from "../util/startGame.js";
+import updateShipPlaceName from "../util/updateShipName.js";
 
 export default function placePlayerShips() {
   const body = document.querySelector("body");

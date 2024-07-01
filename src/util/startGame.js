@@ -1,9 +1,9 @@
-import Player from "./classes/Player.js";
+import Player from "../classes/Player.js";
 import placeComputerShips from "./placeComputerShips.js";
-import displayPlayerBoard from "./dom/displayPlayerBoard.js";
-import displayComputerBoard from "./dom/displayComputerBoard.js";
-import play from "./dom/play.js";
-import "./styles/game.css";
+import displayPlayerBoard from "../dom/displayPlayerBoard.js";
+import displayComputerBoard from "../dom/displayComputerBoard.js";
+import play from "../dom/play.js";
+import "../styles/game.css";
 
 const player = new Player("player");
 const computer = new Player();

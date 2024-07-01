@@ -1,6 +1,6 @@
 import displayComputerBoard from "./displayComputerBoard.js";
 import displayPlayerBoard from "./displayPlayerBoard.js";
-import generateCoordinate from "./generateCoordinate.js";
+import generateCoordinate from "../util/generateCoordinate.js";
 import endGame from "./endGame.js";
 import cannonFire from "../sounds/cannonFire.mp3";
 import waterSplash from "../sounds/waterSplash.mp3";

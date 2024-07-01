@@ -1,4 +1,4 @@
 import "./styles/game.css";
-import placePlayerShips from "./placePlayerShips.js";
+import placePlayerShips from "./dom/placePlayerShips.js";
 
 placePlayerShips();
