@@ -41,9 +41,9 @@ export default function play(player, computer) {
 
           turn = "player";
           computerBoard.addEventListener("click", attackComputerEvent);
-        }, 3000);
+        }, 2000);
       }
-    }, 3000);
+    }, 2400);
   }
 
   function attackComputerEvent(e) {
