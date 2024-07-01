@@ -45,9 +45,9 @@ export default function placePlayerShips() {
 
     const cells = document.querySelectorAll(".placeShip.board .cell");
 
-    // const shipLengths = [5, 4, 3, 3, 2];
+    // const shipsToBePlaced = [5, 4, 3, 3, 2];
 
-    const shipLengths = [
+    const shipsToBePlaced = [
       {
         name: "Carrier",
         length: 5,
@@ -70,7 +70,7 @@ export default function placePlayerShips() {
       },
     ];
 
-    updateShipPlaceName(shipLengths);
+    updateShipPlaceName(shipsToBePlaced);
     const objects = [];
 
     cells.forEach((cell) => {
@@ -81,12 +81,12 @@ export default function placePlayerShips() {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipLengths[0].length; i++) {
+          for (let i = column; i < column + shipsToBePlaced[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipLengths[0].length; i++) {
+          for (let i = row; i < row + shipsToBePlaced[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -107,12 +107,12 @@ export default function placePlayerShips() {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipLengths[0].length; i++) {
+          for (let i = column; i < column + shipsToBePlaced[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipLengths[0].length; i++) {
+          for (let i = row; i < row + shipsToBePlaced[0].length; i++) {
             if (i > 9) break;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -133,12 +133,12 @@ export default function placePlayerShips() {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipLengths[0].length; i++) {
+          for (let i = column; i < column + shipsToBePlaced[0].length; i++) {
             if (i > 9) return;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipLengths[0].length; i++) {
+          for (let i = row; i < row + shipsToBePlaced[0].length; i++) {
             if (i > 9) return;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -163,17 +163,17 @@ export default function placePlayerShips() {
         });
 
         const obj = {
-          length: shipLengths[0].length,
+          length: shipsToBePlaced[0].length,
           startingCoordinate: cell.dataset.coordinates,
           axis: axis,
         };
 
         objects.push(obj);
 
-        shipLengths.shift();
-        updateShipPlaceName(shipLengths);
+        shipsToBePlaced.shift();
+        updateShipPlaceName(shipsToBePlaced);
 
-        if (shipLengths.length === 0) {
+        if (shipsToBePlaced.length === 0) {
           dialog.close();
           dialog.remove();
 
