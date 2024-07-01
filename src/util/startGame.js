@@ -2,7 +2,8 @@ import Player from "../classes/Player.js";
 import placeComputerShips from "./placeComputerShips.js";
 import displayPlayerBoard from "../dom/displayPlayerBoard.js";
 import displayComputerBoard from "../dom/displayComputerBoard.js";
-import play from "../dom/play.js";
+import playwithDelays from "../dom/playwithDelays.js";
+import playWithoutDelay from "../dom/playWithoutDelays.js";
 import "../styles/game.css";
 
 const player = new Player("player");
@@ -16,5 +17,6 @@ export default function startGame(obj) {
   placeComputerShips(computer);
   displayPlayerBoard(player);
   displayComputerBoard(computer);
-  play(player, computer);
+  playwithDelays(player, computer);
+  // playWithoutDelay(player, computer);
 }
