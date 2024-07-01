@@ -11,7 +11,7 @@ const computer = new Player();
 
 export default function startGame(obj) {
   obj.forEach((o) => {
-    player.gameboard.placeShip(o.length, o.startingCoordinate, o.axis);
+    player.gameboard.placeShip(o.length, o.startingCoordinate, o.axis, o.type);
   });
 
   placeComputerShips(computer);

@@ -4,5 +4,5 @@ export default function updateShipPlaceName(obj) {
   const span = dialog.querySelector("#shipName");
 
   span.style.textDecoration = "underline";
-  span.textContent = obj[0].name;
+  span.textContent = obj[0].type;
 }

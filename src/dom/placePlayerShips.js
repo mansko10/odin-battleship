@@ -49,23 +49,23 @@ export default function placePlayerShips() {
 
     const shipsToBePlaced = [
       {
-        name: "Carrier",
+        type: "Carrier",
         length: 5,
       },
       {
-        name: "Battleship",
+        type: "Battleship",
         length: 4,
       },
       {
-        name: "Cruiser",
+        type: "Cruiser",
         length: 3,
       },
       {
-        name: "Submarine",
+        type: "Submarine",
         length: 3,
       },
       {
-        name: "Destroyer",
+        type: "Destroyer",
         length: 2,
       },
     ];
@@ -166,6 +166,7 @@ export default function placePlayerShips() {
           length: shipsToBePlaced[0].length,
           startingCoordinate: cell.dataset.coordinates,
           axis: axis,
+          type: shipsToBePlaced[0].type,
         };
 
         objects.push(obj);

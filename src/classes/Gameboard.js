@@ -43,9 +43,10 @@ export default class Gameboard {
   #placeShipHorizontally(
     length,
     startingCoordinate,
+    type,
     identifier = this.ships.length,
   ) {
-    const ship = new Ship(length, startingCoordinate, identifier);
+    const ship = new Ship(length, startingCoordinate, identifier, type);
 
     startingCoordinate = startingCoordinate.split(",");
 
@@ -85,9 +86,10 @@ export default class Gameboard {
   #placeShipVertically(
     length,
     startingCoordinate,
+    type,
     identifier = this.ships.length,
   ) {
-    const ship = new Ship(length, startingCoordinate, identifier);
+    const ship = new Ship(length, startingCoordinate, identifier, type);
 
     startingCoordinate = startingCoordinate.split(",");
 
@@ -111,11 +113,11 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
-  placeShip(length, startingCoordinate, axis) {
+  placeShip(length, startingCoordinate, axis, type) {
     if (axis === "horizontal") {
-      this.#placeShipHorizontally(length, startingCoordinate);
+      this.#placeShipHorizontally(length, startingCoordinate, type);
     } else if (axis === "vertical") {
-      this.#placeShipVertically(length, startingCoordinate);
+      this.#placeShipVertically(length, startingCoordinate, type);
     }
   }
 
