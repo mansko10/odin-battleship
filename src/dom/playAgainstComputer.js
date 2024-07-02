@@ -6,12 +6,14 @@ import displayComputerBoard from "./displayComputerBoard.js";
 import displayPlayerBoard from "./displayPlayerBoard.js";
 import playWithoutDelay from "./playWithoutDelays.js";
 import playWithDelay from "./playwithDelays.js";
+import generateSinglePlayerTemplate from "../templates/singlePlayerTemplate.js";
 
-export default async function playAgainstComputer() {
-  const player = new Player("Player");
+export default async function playAgainstComputer(name) {
+  generateSinglePlayerTemplate(name);
+  const player = new Player(name);
   const computer = new Player();
 
-  const playerShipPlacements = await placePlayerShips();
+  const playerShipPlacements = await placePlayerShips(name);
 
   player.placeAllShips(playerShipPlacements);
   placeComputerShips(computer);
@@ -22,6 +24,6 @@ export default async function playAgainstComputer() {
   console.log(player);
   console.log(computer);
 
-  // playWithoutDelay(player, computer);
-  playWithDelay(player, computer);
+  playWithoutDelay(player, computer);
+  // playWithDelay(player, computer);
 }
