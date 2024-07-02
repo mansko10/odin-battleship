@@ -1,4 +1,3 @@
-import "./styles/game.css";
-import placePlayerShips from "./dom/placePlayerShips.js";
+import playAgainstComputer from "./dom/playAgainstComputer.js";
 
-placePlayerShips();
+playAgainstComputer();
