@@ -1,109 +1,92 @@
-import genAdjacent from "./genAdjacent.js";
+import genAdjacent from "./genAdjacent";
 
 let adjacents = [];
 let lastOccupied = [];
-let axis;
 
 export default function generateCoordinate(player) {
   if (adjacents.length > 0) {
     if (lastOccupied.length >= 2) {
-      console.log(lastOccupied);
       let first = lastOccupied[0]; // format is 'a,b'
-      let second = lastOccupied[1]; //format is 'c,d'
+      let second = lastOccupied[1]; // format is 'c,d'
 
-      first = first.split(","); //format is ['a', 'b']
-      second = second.split(","); //format is ['a', 'b']
+      first = first.split(","); // format is ['a', 'b']
+      second = second.split(","); // format is ['a', 'b']
 
-      let rowOfFirst = first[0]; //format is 'a'
-      let rowOfSecond = second[0]; //format is 'b'
-      let colOfFirst = first[1]; //format is 'c'
-      let colOfSecond = second[1]; //format is 'd'
+      const rowOfFirst = first[0]; // format is 'a'
+      const rowOfSecond = second[0]; // format is 'b'
+      const colOfFirst = first[1]; // format is 'c'
+      const colOfSecond = second[1]; // format is 'd'
 
       if (rowOfFirst === rowOfSecond) {
-        console.log("ITS HORIZONTAL", rowOfFirst, rowOfSecond);
-
-        for (let i = 0; i < adjacents.length; i++) {
+        for (let i = 0; i < adjacents.length; i += 1) {
           let adjacent = adjacents[i];
           adjacent = adjacent.split(",");
 
           if (adjacent[0] !== rowOfFirst) {
-            console.log("selective axis horizontal");
             adjacents.splice(i, 1);
-            i--;
+            i -= 1;
           }
         }
       } else if (colOfFirst === colOfSecond) {
-        console.log("ITS VERTICAL");
-        console.log(adjacents, "ADJACENTS BEFORE SPLICE");
-
-        for (let i = 0; i < adjacents.length; i++) {
+        for (let i = 0; i < adjacents.length; i += 1) {
           let adjacent = adjacents[i];
           adjacent = adjacent.split(",");
 
           if (adjacent[1] !== colOfFirst) {
-            console.log("selective axis vertical");
             adjacents.splice(i, 1);
-            i--;
+            i -= 1;
           }
         }
-
-        console.log(adjacents, "ADJACENTS AFTER SPLICE");
       }
     }
 
-    //pick from adjacents
+    // pick from adjacents
     const lastAdjacent = adjacents[adjacents.length - 1];
     const lastAdjacentSplit = lastAdjacent.split(",");
     const lastAdjacentSplitRow = +lastAdjacentSplit[0];
     const lastAdjacentSplitColumn = +lastAdjacentSplit[1];
 
-    //prettier-ignore
+    // prettier-ignore
     if (player.gameboard.board[lastAdjacentSplitRow][lastAdjacentSplitColumn].isOccupied) {
-      //Handles case where adjacent itself is occupied. The adjacent's adjacents will also be concatenated after adjacent is popped
+      // Handles case where adjacent itself is occupied. The adjacent's adjacents will also be concatenated after adjacent is popped
       const targettedShipIdentifier = player.gameboard.board[lastAdjacentSplitRow][lastAdjacentSplitColumn].occupier;
       const shipInBoard = player.gameboard.ships[targettedShipIdentifier];
       
       lastOccupied.push(`${lastAdjacentSplitRow},${lastAdjacentSplitColumn}`);
-      let additionalAdjacent = genAdjacent(lastAdjacentSplitRow, lastAdjacentSplitColumn, player);
+      const additionalAdjacent = genAdjacent(lastAdjacentSplitRow, lastAdjacentSplitColumn, player);
       adjacents.pop();
       adjacents = adjacents.concat(additionalAdjacent);
   
-      //IsSunk won't work (due to return being later) so came up with this way. The goal is to prevent hitting adjacent cells of already sunk ship.
+      // IsSunk won't work (due to return being later) so came up with this way. The goal is to prevent hitting adjacent cells of already sunk ship.
       if (shipInBoard.length - shipInBoard.timesHit === 1) {
         adjacents = [];
         lastOccupied = [];
-        axis = undefined;
       };
-      console.log(adjacents);
-      return lastAdjacent;
-    } else {
-      //Handles case where adjacent is not occupied. The adjacent is simply popped off
-      adjacents.pop();
-      console.log(adjacents);
       return lastAdjacent;
     }
-  } else {
-    //Generate randomly and do not pick from adjacents
-    let row;
-    let column;
-    let result;
-
-    while (!result || player.gameboard.cellsHit.includes(result)) {
-      row = Math.round(Math.random() * 9);
-      column = Math.round(Math.random() * 9);
-
-      result = `${row},${column}`;
-    }
-
-    if (player.gameboard.board[row][column].isOccupied) {
-      lastOccupied.push(`${row},${column}`);
-      //Checks if coordinates randomly generated is occupied. If it is, then its adjacents are concatenated to adjacents array
-      let additionalAdjacent = genAdjacent(row, column, player);
-
-      adjacents = adjacents.concat(additionalAdjacent);
-      console.log(adjacents);
-    }
-
-    return result;
+    // Handles case where adjacent is not occupied. The adjacent is simply popped off
+    adjacents.pop();
+    return lastAdjacent;
   }
+  // Generate randomly and do not pick from adjacents
+  let row;
+  let column;
+  let result;
+
+  while (!result || player.gameboard.cellsHit.includes(result)) {
+    row = Math.round(Math.random() * 9);
+    column = Math.round(Math.random() * 9);
+
+    result = `${row},${column}`;
+  }
+
+  if (player.gameboard.board[row][column].isOccupied) {
+    lastOccupied.push(`${row},${column}`);
+    // Checks if coordinates randomly generated is occupied. If it is, then its adjacents are concatenated to adjacents array
+    const additionalAdjacent = genAdjacent(row, column, player);
+
+    adjacents = adjacents.concat(additionalAdjacent);
+  }
+
+  return result;
 }

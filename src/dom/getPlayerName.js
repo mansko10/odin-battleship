@@ -1,5 +1,5 @@
 export default function getPlayerName() {
-  const promise = new Promise((resolve, reject) => {
+  const promise = new Promise((resolve) => {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");

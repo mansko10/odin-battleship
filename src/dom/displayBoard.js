@@ -1,4 +1,4 @@
-//For double player only
+// For double player only
 
 export default function displayBoard(player1, player2) {
   const player1Board = document.querySelector(".player1.board");

@@ -1,7 +1,7 @@
-import displayComputerBoard from "./displayComputerBoard.js";
-import displayPlayerBoard from "./displayPlayerBoard.js";
-import generateCoordinate from "../util/generateCoordinate.js";
-import endGame from "./endGame.js";
+import displayComputerBoard from "./displayComputerBoard";
+import displayPlayerBoard from "./displayPlayerBoard";
+import generateCoordinate from "../util/generateCoordinate";
+import endGame from "./endGame";
 import cannonFire from "../sounds/cannonFire.mp3";
 import waterSplash from "../sounds/waterSplash.mp3";
 import explosion from "../sounds/explosion.mp3";
@@ -52,7 +52,7 @@ export default function play(player, computer) {
       computerBoard.removeEventListener("click", attackComputerEvent);
       cannonFireSound.play();
       setTimeout(() => {
-        const coordinates = e.target.dataset.coordinates;
+        const { coordinates } = e.target.dataset;
         const splitCoordinates = coordinates.split(",");
         if (computer.gameboard.cellsHit.includes(coordinates)) return;
         computer.gameboard.receiveAttack(coordinates);

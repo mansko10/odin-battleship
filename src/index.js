@@ -1,8 +1,8 @@
-import playAgainstComputer from "./dom/playAgainstComputer.js";
-import playerAgainstFriend from "./dom/playAgainstFriend.js";
-import chooseGameType from "./dom/chooseGameType.js";
-import getPlayerName from "./dom/getPlayerName.js";
-import getPlayerNames from "./dom/getPlayerNames.js";
+import playAgainstComputer from "./dom/playAgainstComputer";
+import playerAgainstFriend from "./dom/playAgainstFriend";
+import chooseGameType from "./dom/chooseGameType";
+import getPlayerName from "./dom/getPlayerName";
+import getPlayerNames from "./dom/getPlayerNames";
 
 async function startGame() {
   const gameType = await chooseGameType();

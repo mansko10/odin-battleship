@@ -22,7 +22,7 @@ export default function placeComputerShips(computer) {
     },
   ];
 
-  for (let i = 0; i < shipsToBePlaced.length; i++) {
+  for (let i = 0; i < shipsToBePlaced.length; i += 1) {
     const trueFalse = Math.round(Math.random()) ? "vertical" : "horizontal";
 
     const row = Math.round(Math.random() * 9);
@@ -37,9 +37,7 @@ export default function placeComputerShips(computer) {
     );
 
     if (computer.gameboard.ships.length !== i + 1) {
-      i--; //If ship was NOT placed then the current instance of loop will keep re-running until ship is placed
+      i -= 1; // If ship was NOT placed then the current instance of loop will keep re-running until ship is placed
     }
   }
-
-  console.log(computer.gameboard.ships);
 }

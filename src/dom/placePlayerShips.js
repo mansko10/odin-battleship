@@ -1,8 +1,8 @@
 import "../styles/placeShipModal.css";
-import updateShipPlaceName from "../util/updateShipName.js";
+import updateShipPlaceName from "../util/updateShipName";
 
 export default async function placePlayerShips(name = "Player") {
-  const promise = new Promise((resolve, reject) => {
+  const promise = new Promise((resolve) => {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");
@@ -17,10 +17,8 @@ export default async function placePlayerShips(name = "Player") {
 
     let axis = "horizontal";
 
-    console.log(axis);
-
     const button = document.querySelector("dialog button");
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click", () => {
       if (axis === "horizontal") {
         button.textContent = "Change to horizontal";
         axis = "vertical";
@@ -32,8 +30,8 @@ export default async function placePlayerShips(name = "Player") {
 
     const placeShipBoard = document.querySelector(".placeShip.board");
 
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 10; j++) {
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
         cell.dataset.coordinates = `${i},${j}`;
@@ -78,12 +76,12 @@ export default async function placePlayerShips(name = "Player") {
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipsToBePlaced[0].length; i++) {
+          for (let i = column; i < column + shipsToBePlaced[0].length; i += 1) {
             if (i > 9) break;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipsToBePlaced[0].length; i++) {
+          for (let i = row; i < row + shipsToBePlaced[0].length; i += 1) {
             if (i > 9) break;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -97,19 +95,19 @@ export default async function placePlayerShips(name = "Player") {
         });
       });
 
-      cell.addEventListener("mouseout", (e) => {
+      cell.addEventListener("mouseout", () => {
         const nextCoordinates = [];
         const split = cell.dataset.coordinates.split(",");
         const row = Number(split[0]);
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipsToBePlaced[0].length; i++) {
+          for (let i = column; i < column + shipsToBePlaced[0].length; i += 1) {
             if (i > 9) break;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipsToBePlaced[0].length; i++) {
+          for (let i = row; i < row + shipsToBePlaced[0].length; i += 1) {
             if (i > 9) break;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -123,19 +121,19 @@ export default async function placePlayerShips(name = "Player") {
         });
       });
 
-      cell.addEventListener("click", (e) => {
+      cell.addEventListener("click", () => {
         const nextCoordinates = [];
         const split = cell.dataset.coordinates.split(",");
         const row = Number(split[0]);
         const column = Number(split[1]);
 
         if (axis === "horizontal") {
-          for (let i = column; i < column + shipsToBePlaced[0].length; i++) {
+          for (let i = column; i < column + shipsToBePlaced[0].length; i += 1) {
             if (i > 9) return;
             nextCoordinates.push(`${row},${i}`);
           }
         } else if (axis === "vertical") {
-          for (let i = row; i < row + shipsToBePlaced[0].length; i++) {
+          for (let i = row; i < row + shipsToBePlaced[0].length; i += 1) {
             if (i > 9) return;
             nextCoordinates.push(`${i},${column}`);
           }
@@ -162,7 +160,7 @@ export default async function placePlayerShips(name = "Player") {
         const playerShipPlacement = {
           length: shipsToBePlaced[0].length,
           startingCoordinate: cell.dataset.coordinates,
-          axis: axis,
+          axis,
           type: shipsToBePlaced[0].type,
         };
 

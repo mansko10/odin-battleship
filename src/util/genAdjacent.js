@@ -27,9 +27,9 @@ export default function genAdjacent(row, column, player) {
   )
     adjacents.push(fourth.join(","));
 
-  adjacents = adjacents.filter((adjacent) => {
-    return !player.gameboard.cellsHit.includes(adjacent);
-  });
+  adjacents = adjacents.filter(
+    (adjacent) => !player.gameboard.cellsHit.includes(adjacent),
+  );
 
   return adjacents;
 }

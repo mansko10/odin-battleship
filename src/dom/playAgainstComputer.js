@@ -1,12 +1,12 @@
 import "../styles/game.css";
-import Player from "../classes/Player.js";
-import placePlayerShips from "./placePlayerShips.js";
-import placeComputerShips from "../util/placeComputerShips.js";
-import displayComputerBoard from "./displayComputerBoard.js";
-import displayPlayerBoard from "./displayPlayerBoard.js";
-import playWithoutDelay from "./playWithoutDelays.js";
-import playWithDelay from "./playwithDelays.js";
-import generateSinglePlayerTemplate from "../templates/singlePlayerTemplate.js";
+import Player from "../classes/Player";
+import placePlayerShips from "./placePlayerShips";
+import placeComputerShips from "../util/placeComputerShips";
+import displayComputerBoard from "./displayComputerBoard";
+import displayPlayerBoard from "./displayPlayerBoard";
+import playWithoutDelay from "./playWithoutDelays";
+import playWithDelay from "./playwithDelays";
+import generateSinglePlayerTemplate from "../templates/singlePlayerTemplate";
 
 export default async function playAgainstComputer(name) {
   generateSinglePlayerTemplate(name);
@@ -20,9 +20,6 @@ export default async function playAgainstComputer(name) {
 
   displayPlayerBoard(player);
   displayComputerBoard(computer);
-
-  console.log(player);
-  console.log(computer);
 
   playWithoutDelay(player, computer);
   // playWithDelay(player, computer);

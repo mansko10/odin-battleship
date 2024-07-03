@@ -1,13 +1,13 @@
-import Ship from "./Ship.js";
+import Ship from "./Ship";
 
 function createBoard() {
   const rows = 10;
   const columns = 10;
   const board = [];
-  for (let i = 0; i < rows; i++) {
+  for (let i = 0; i < rows; i += 1) {
     board[i] = [];
 
-    for (let j = 0; j < columns; j++) {
+    for (let j = 0; j < columns; j += 1) {
       board[i][j] = {
         coordinates: `${i},${j}`,
         isOccupied: false,
@@ -27,10 +27,10 @@ export default class Gameboard {
     this.cellsHit = [];
   }
 
-  #canBePlacedHorizontally(row, startingColumn, length) {
+  canBePlacedHorizontally(row, startingColumn, length) {
     let result = true;
 
-    for (let i = startingColumn; i < startingColumn + length; i++) {
+    for (let i = startingColumn; i < startingColumn + length; i += 1) {
       if (this.board[row][i] === undefined || this.board[row][i].isOccupied) {
         result = false;
         break;
@@ -40,7 +40,7 @@ export default class Gameboard {
     return result;
   }
 
-  #placeShipHorizontally(
+  placeShipHorizontally(
     length,
     startingCoordinate,
     type,
@@ -48,12 +48,12 @@ export default class Gameboard {
   ) {
     const ship = new Ship(length, startingCoordinate, identifier, type);
 
-    startingCoordinate = startingCoordinate.split(",");
+    const splitStartingCoordinate = startingCoordinate.split(",");
 
-    const row = +startingCoordinate[0];
-    const startingColumn = +startingCoordinate[1];
+    const row = +splitStartingCoordinate[0];
+    const startingColumn = +splitStartingCoordinate[1];
 
-    const canBePlaced = this.#canBePlacedHorizontally(
+    const canBePlaced = this.canBePlacedHorizontally(
       row,
       startingColumn,
       length,
@@ -61,8 +61,8 @@ export default class Gameboard {
 
     if (!canBePlaced) return;
 
-    for (let i = startingColumn; i < startingColumn + length; i++) {
-      /*^^^^^^^^^^^^^^ LENGTH*/
+    for (let i = startingColumn; i < startingColumn + length; i += 1) {
+      /* ^^^^^^^^^^^^^^ LENGTH */
       this.board[row][i].isOccupied = true;
       this.board[row][i].occupier = ship.identifier;
     }
@@ -70,10 +70,10 @@ export default class Gameboard {
     this.ships.push(ship);
   }
 
-  #canBePlacedVertically(startingRow, column, length) {
+  canBePlacedVertically(startingRow, column, length) {
     let result = true;
 
-    for (let i = startingRow; i < startingRow + length; i++) {
+    for (let i = startingRow; i < startingRow + length; i += 1) {
       if (this.board[i] === undefined || this.board[i][column].isOccupied) {
         result = false;
         break;
@@ -83,7 +83,7 @@ export default class Gameboard {
     return result;
   }
 
-  #placeShipVertically(
+  placeShipVertically(
     length,
     startingCoordinate,
     type,
@@ -91,21 +91,17 @@ export default class Gameboard {
   ) {
     const ship = new Ship(length, startingCoordinate, identifier, type);
 
-    startingCoordinate = startingCoordinate.split(",");
+    const splitStartingCoordinate = startingCoordinate.split(",");
 
-    const startingRow = +startingCoordinate[0];
-    const column = +startingCoordinate[1];
+    const startingRow = +splitStartingCoordinate[0];
+    const column = +splitStartingCoordinate[1];
 
-    const canBePlaced = this.#canBePlacedVertically(
-      startingRow,
-      column,
-      length,
-    );
+    const canBePlaced = this.canBePlacedVertically(startingRow, column, length);
 
     if (!canBePlaced) return;
 
-    for (let i = startingRow; i < startingRow + length; i++) {
-      /*^^^^^^^^^^^^^^ LENGTH*/
+    for (let i = startingRow; i < startingRow + length; i += 1) {
+      /* ^^^^^^^^^^^^^^ LENGTH */
       this.board[i][column].isOccupied = true;
       this.board[i][column].occupier = ship.identifier;
     }
@@ -115,9 +111,9 @@ export default class Gameboard {
 
   placeShip(length, startingCoordinate, axis, type) {
     if (axis === "horizontal") {
-      this.#placeShipHorizontally(length, startingCoordinate, type);
+      this.placeShipHorizontally(length, startingCoordinate, type);
     } else if (axis === "vertical") {
-      this.#placeShipVertically(length, startingCoordinate, type);
+      this.placeShipVertically(length, startingCoordinate, type);
     }
   }
 
@@ -127,8 +123,8 @@ export default class Gameboard {
 
     this.cellsHit = [];
 
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < columns; j++) {
+    for (let i = 0; i < rows; i += 1) {
+      for (let j = 0; j < columns; j += 1) {
         if (this.board[i][j].isHit === true) {
           this.cellsHit.push(this.board[i][j].coordinates);
         }
@@ -137,22 +133,22 @@ export default class Gameboard {
   }
 
   receiveAttack(coordinates) {
-    coordinates = coordinates.split(",");
-    const row = coordinates[0];
-    const column = coordinates[1];
+    const splitCoordinates = coordinates.split(",");
+    const row = splitCoordinates[0];
+    const column = splitCoordinates[1];
 
     if (this.board[row][column].isHit === true) return;
 
     this.board[row][column].isHit = true;
     // this.updateCellsHit();
-    this.cellsHit.push(coordinates.join(","));
+    this.cellsHit.push(splitCoordinates.join(","));
 
     if (this.board[row][column].isOccupied === true) {
-      const occupier = this.board[row][column].occupier;
+      const { occupier } = this.board[row][column];
 
-      const indexOfOccupier = this.ships.findIndex((ship) => {
-        return ship.identifier === occupier;
-      });
+      const indexOfOccupier = this.ships.findIndex(
+        (ship) => ship.identifier === occupier,
+      );
 
       this.ships[indexOfOccupier].hit();
     }
@@ -160,7 +156,7 @@ export default class Gameboard {
 
   checkAllSunk() {
     let shipsSunk = 0;
-    let totalShips = this.ships.length;
+    const totalShips = this.ships.length;
 
     this.ships.forEach((ship) => {
       if (ship.hasBeenSunk === true) {

@@ -1,7 +1,7 @@
-import displayComputerBoard from "./displayComputerBoard.js";
-import displayPlayerBoard from "./displayPlayerBoard.js";
-import generateCoordinate from "../util/generateCoordinate.js";
-import endGame from "../dom/endGame.js";
+import displayComputerBoard from "./displayComputerBoard";
+import displayPlayerBoard from "./displayPlayerBoard";
+import generateCoordinate from "../util/generateCoordinate";
+import endGame from "./endGame";
 
 export default function playWithoutDelay(player, computer) {
   let turn = "player";
@@ -26,7 +26,7 @@ export default function playWithoutDelay(player, computer) {
 
   function attackComputerEvent(e) {
     if (turn === "player") {
-      const coordinates = e.target.dataset.coordinates;
+      const { coordinates } = e.target.dataset;
       if (computer.gameboard.cellsHit.includes(coordinates)) return;
       computer.gameboard.receiveAttack(coordinates);
       displayComputerBoard(computer);

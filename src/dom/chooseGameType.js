@@ -1,7 +1,7 @@
 import "../styles/gameTypeModal.css";
 
-export default function () {
-  const promise = new Promise((resolve, reject) => {
+export default function chooseGameType() {
+  const promise = new Promise((resolve) => {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");

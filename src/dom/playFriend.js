@@ -1,6 +1,6 @@
-import displayBoard from "./displayBoard.js";
-import endGame from "./endGame.js";
-import displayTurn from "./displayTurn.js";
+import displayBoard from "./displayBoard";
+import endGame from "./endGame";
+import displayTurn from "./displayTurn";
 
 export default function playFriend(player1, player2) {
   let turn = player1.name;
@@ -10,7 +10,7 @@ export default function playFriend(player1, player2) {
 
   function attackPlayer1(e) {
     if (turn === player2.name) {
-      const coordinates = e.target.dataset.coordinates;
+      const { coordinates } = e.target.dataset;
 
       if (player1.gameboard.cellsHit.includes(coordinates)) return;
 
@@ -31,7 +31,7 @@ export default function playFriend(player1, player2) {
 
   function attackPlayer2(e) {
     if (turn === player1.name) {
-      const coordinates = e.target.dataset.coordinates;
+      const { coordinates } = e.target.dataset;
 
       if (player2.gameboard.cellsHit.includes(coordinates)) return;
 

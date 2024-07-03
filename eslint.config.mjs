@@ -9,10 +9,13 @@ import pluginJs from "@eslint/js";
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({baseDirectory: __dirname, recommendedConfig: pluginJs.configs.recommended});
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: pluginJs.configs.recommended,
+});
 
 export default [
-  {languageOptions: { globals: globals.browser }},
+  { languageOptions: { globals: globals.browser } },
   ...compat.extends("airbnb"),
   {
     ignores: ["node_modules", "dist"],
@@ -20,22 +23,11 @@ export default [
   eslintConfigPrettier,
   {
     rules: {
-      "import/no-named-as-default": "off",
       "import/no-named-as-default-member": "off",
-      "import/no-extraneous-dependencies": "off",
-      "import/extensions": "off",
-      "no-console": "off",
+      "import/no-named-as-default": "off",
+      "no-use-before-define": "off",
+
       "no-unused-vars": "off"
-    }
+    },
   },
-  {
-    "overrides": [
-      {
-        "files": ["tests/**/*"],
-        "env": {
-          "jest": true
-        }
-      }
-    ]
-  }
 ];

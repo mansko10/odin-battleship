@@ -1,9 +1,9 @@
-import Player from "../classes/Player.js";
-import placeComputerShips from "./placeComputerShips.js";
-import displayPlayerBoard from "../dom/displayPlayerBoard.js";
-import displayComputerBoard from "../dom/displayComputerBoard.js";
-import playwithDelays from "../dom/playwithDelays.js";
-import playWithoutDelay from "../dom/playWithoutDelays.js";
+import Player from "../classes/Player";
+import placeComputerShips from "./placeComputerShips";
+import displayPlayerBoard from "../dom/displayPlayerBoard";
+import displayComputerBoard from "../dom/displayComputerBoard";
+import playwithDelays from "../dom/playwithDelays";
+import playWithoutDelay from "../dom/playWithoutDelays";
 import "../styles/game.css";
 
 const player = new Player("player");
