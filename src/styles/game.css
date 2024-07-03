@@ -30,8 +30,7 @@
   height: 400px;
 }
 
-.game .player.board,
-.computer.board {
+.game .board {
   flex: 0 1 400px;
   border-top: 1px solid black;
   border-left: 1px solid black;
