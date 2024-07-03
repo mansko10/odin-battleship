@@ -1,6 +1,9 @@
+import "../styles/game.css";
+
 export default function generateDoublePlayerTemplate(name1, name2) {
   const body = document.querySelector("body");
   const h1 = body.querySelector("h1");
+  const turnsDiv = document.querySelector(".turns");
   const boardsDiv = document.createElement("div");
 
   const template = `<div class="player1Display">
@@ -15,5 +18,5 @@ export default function generateDoublePlayerTemplate(name1, name2) {
   boardsDiv.classList.add("boards");
   boardsDiv.innerHTML = template;
 
-  h1.insertAdjacentElement("afterend", boardsDiv);
+  turnsDiv.insertAdjacentElement("afterend", boardsDiv);
 }

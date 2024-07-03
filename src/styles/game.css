@@ -49,4 +49,23 @@
 .computer.board .cell:hover {
   border: 1px solid darkorange;
   cursor: pointer;
+  user-select: none;
+}
+
+.player1.board .cell:hover {
+  border: 1px solid darkorange;
+  cursor: pointer;
+  user-select: none;
+}
+
+.player2.board .cell:hover {
+  border: 1px solid darkorange;
+  cursor: pointer;
+  user-select: none;
+}
+
+.turns {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
 }

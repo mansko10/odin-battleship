@@ -1,8 +1,10 @@
 import displayBoard from "./displayBoard.js";
 import endGame from "./endGame.js";
+import displayTurn from "./displayTurn.js";
 
 export default function playFriend(player1, player2) {
   let turn = player1.name;
+  displayTurn(player1.name);
   const player1Board = document.querySelector(".board.player1");
   const player2Board = document.querySelector(".board.player2");
 
@@ -20,6 +22,7 @@ export default function playFriend(player1, player2) {
       }
 
       turn = player1.name;
+      displayTurn(player1.name);
       player1Board.removeEventListener("click", attackPlayer1);
       player2Board.addEventListener("click", attackPlayer2);
       displayBoard(player1, player2);
@@ -40,6 +43,7 @@ export default function playFriend(player1, player2) {
       }
 
       turn = player2.name;
+      displayTurn(player2.name);
       player2Board.removeEventListener("click", attackPlayer2);
       player1Board.addEventListener("click", attackPlayer1);
       displayBoard(player1, player2);

@@ -25,8 +25,6 @@ export default function displayBoard(player1, player2) {
         cell.textContent = "HIT";
       } else if (!column.isOccupied && column.isHit) {
         cell.style.backgroundColor = "gray";
-      } else if (column.isOccupied) {
-        cell.style.backgroundColor = "midnightBlue";
       }
 
       player1Board.appendChild(cell);
@@ -51,8 +49,6 @@ export default function displayBoard(player1, player2) {
         cell.textContent = "HIT";
       } else if (!column.isOccupied && column.isHit) {
         cell.style.backgroundColor = "gray";
-      } else if (column.isOccupied) {
-        cell.style.backgroundColor = "midnightBlue";
       }
 
       player2Board.appendChild(cell);
