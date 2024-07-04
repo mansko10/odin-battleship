@@ -10,7 +10,7 @@ export default function generateCoordinate(player) {
       let second = lastOccupied[1]; // format is 'c,d'
 
       first = first.split(","); // format is ['a', 'b']
-      second = second.split(","); // format is ['a', 'b']
+      second = second.split(","); // format is ['c', 'd']
 
       const rowOfFirst = first[0]; // format is 'a'
       const rowOfSecond = second[0]; // format is 'b'
@@ -49,19 +49,20 @@ export default function generateCoordinate(player) {
     // prettier-ignore
     if (player.gameboard.board[lastAdjacentSplitRow][lastAdjacentSplitColumn].isOccupied) {
       // Handles case where adjacent itself is occupied. The adjacent's adjacents will also be concatenated after adjacent is popped
-      const targettedShipIdentifier = player.gameboard.board[lastAdjacentSplitRow][lastAdjacentSplitColumn].occupier;
-      const shipInBoard = player.gameboard.ships[targettedShipIdentifier];
-      
+      adjacents.pop();
       lastOccupied.push(`${lastAdjacentSplitRow},${lastAdjacentSplitColumn}`);
       const additionalAdjacent = genAdjacent(lastAdjacentSplitRow, lastAdjacentSplitColumn, player);
-      adjacents.pop();
       adjacents = adjacents.concat(additionalAdjacent);
+
+      const targettedShipIdentifier = player.gameboard.board[lastAdjacentSplitRow][lastAdjacentSplitColumn].occupier;
+      const shipInBoard = player.gameboard.ships[targettedShipIdentifier];
   
       // IsSunk won't work (due to return being later) so came up with this way. The goal is to prevent hitting adjacent cells of already sunk ship.
       if (shipInBoard.length - shipInBoard.timesHit === 1) {
         adjacents = [];
         lastOccupied = [];
       };
+
       return lastAdjacent;
     }
     // Handles case where adjacent is not occupied. The adjacent is simply popped off
@@ -81,8 +82,8 @@ export default function generateCoordinate(player) {
   }
 
   if (player.gameboard.board[row][column].isOccupied) {
+    // Checks if coordinates randomly generated is occupied. If it is, then the cell is pushed to lastOccupied and its adjacents are concatenated to adjacents array
     lastOccupied.push(`${row},${column}`);
-    // Checks if coordinates randomly generated is occupied. If it is, then its adjacents are concatenated to adjacents array
     const additionalAdjacent = genAdjacent(row, column, player);
 
     adjacents = adjacents.concat(additionalAdjacent);
