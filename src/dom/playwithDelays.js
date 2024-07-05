@@ -6,6 +6,10 @@ import cannonFire from "../sounds/cannonFire.mp3";
 import waterSplash from "../sounds/waterSplash.mp3";
 import explosion from "../sounds/explosion.mp3";
 
+const cannonFireSound = new Audio(cannonFire);
+const explosionSound = new Audio(explosion);
+const waterSplashSound = new Audio(waterSplash);
+
 export default function play(player, computer) {
   let turn = "player";
 
@@ -14,7 +18,6 @@ export default function play(player, computer) {
   function attackPlayer() {
     setTimeout(() => {
       if (turn === "computer") {
-        const cannonFireSound = new Audio(cannonFire);
         cannonFireSound.play();
         const coordinates = generateCoordinate(player);
 
@@ -26,10 +29,8 @@ export default function play(player, computer) {
             player.gameboard.board[splitCoordinates[0]][splitCoordinates[1]]
               .isOccupied
           ) {
-            const explosionSound = new Audio(explosion);
             explosionSound.play();
           } else {
-            const waterSplashSound = new Audio(waterSplash);
             waterSplashSound.play();
           }
           displayPlayerBoard(player);
@@ -48,7 +49,6 @@ export default function play(player, computer) {
 
   function attackComputerEvent(e) {
     if (turn === "player") {
-      const cannonFireSound = new Audio(cannonFire);
       computerBoard.removeEventListener("click", attackComputerEvent);
       cannonFireSound.play();
       setTimeout(() => {
@@ -61,10 +61,8 @@ export default function play(player, computer) {
           computer.gameboard.board[splitCoordinates[0]][splitCoordinates[1]]
             .isOccupied
         ) {
-          const explosionSound = new Audio(explosion);
           explosionSound.play();
         } else {
-          const waterSplashSound = new Audio(waterSplash);
           waterSplashSound.play();
         }
 
