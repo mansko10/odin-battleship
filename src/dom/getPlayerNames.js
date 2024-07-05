@@ -1,14 +1,20 @@
+import "../styles/doublePlayerNames.css";
+
 export default function getPlayerName() {
   const promise = new Promise((resolve) => {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");
+    dialog.classList.add("doublePlayerName");
     dialog.innerHTML = `<form>
-        <label for="name1">Player 1 Name: </label>
-        <input type="text" id="name1" name="name1" required />
-        <br>
-        <label for="name2">Player 2 Name: </label>
-        <input type="text" id="name2" name="name2" required />
+        <div class="input-container">
+          <label for="name1">Player 1 Name: </label>
+          <input type="text" id="name1" name="name1" required />
+        </div>
+        <div class="input-container">
+          <label for="name2">Player 2 Name: </label>
+          <input type="text" id="name2" name="name2" required />
+        </div>
         <button>Submit</button>
       </form>`;
 

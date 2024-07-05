@@ -7,9 +7,10 @@ export default async function placePlayerShips(name = "Player") {
 
     const dialog = document.createElement("dialog");
 
-    dialog.innerHTML = `<button>Change to vertical</button><div>
+    dialog.innerHTML = `<div class="place-player-ships">
         <h3>${name}</h3>
         <h3>Please place your <span id="shipName"></span></h3>
+        <button>Change to vertical</button>
         <div class="placeShip board"></div>
       </div>`;
 

@@ -21,6 +21,6 @@ export default async function playAgainstComputer(name) {
   displayPlayerBoard(player);
   displayComputerBoard(computer);
 
-  playWithoutDelay(player, computer);
-  // playWithDelay(player, computer);
+  // playWithoutDelay(player, computer);
+  playWithDelay(player, computer);
 }

@@ -1,12 +1,17 @@
+import "../styles/singlePlayerName.css";
+
 export default function getPlayerName() {
   const promise = new Promise((resolve) => {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");
+    dialog.classList.add("singlePlayerName");
     dialog.innerHTML = `<form>
-      <label for="name">Name: </label>
-      <input type="text" id="name" required />
-      <button>Submit</button>
+      <div class="input-container">
+        <label for="name">Enter your name</label>
+        <input type="text" id="name" required />
+      </div>
+      <button>SUBMIT</button>
     </form>`;
 
     const form = dialog.querySelector("form");

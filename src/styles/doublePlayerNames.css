@@ -1,0 +1,33 @@
+.doublePlayerName form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doublePlayerName label {
+  font-size: 20px;
+}
+
+.doublePlayerName input {
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.doublePlayerName button {
+  align-self: center;
+  font-size: 16px;
+  padding: 10px 15px;
+  background-color: midnightblue;
+  color: orange;
+  cursor: pointer;
+  border: 1px solid midnightblue;
+}
+
+.doublePlayerName button:focus {
+  outline: 2px solid orange;
+}
+
+.doublePlayerName button:hover {
+  background-color: rgb(47, 47, 168);
+}

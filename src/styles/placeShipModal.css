@@ -5,6 +5,16 @@
   box-sizing: border-box;
 }
 
+.place-player-ships {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.place-player-ships button {
+  align-self: center;
+}
+
 h1 {
   text-align: center;
   margin: 2rem;
@@ -34,7 +44,6 @@ h1 {
 .computer.board,
 .placeShip.board {
   flex: 0 1 400px;
-  /* border: 1px solid black; */
   border-top: 1px solid black;
   border-left: 1px solid black;
 

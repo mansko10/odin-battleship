@@ -1,0 +1,42 @@
+.singlePlayerName form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.singlePlayerName .input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.singlePlayerName label {
+  font-style: italic;
+  font-size: 18px;
+}
+
+.singlePlayerName input {
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 200px;
+}
+
+.singlePlayerName button {
+  align-self: center;
+  font-size: 16px;
+  padding: 10px 15px;
+  background-color: midnightblue;
+  color: orange;
+  cursor: pointer;
+  border: 1px solid midnightblue;
+}
+
+.singlePlayerName button:focus {
+  outline: 2px solid orange;
+}
+
+.singlePlayerName button:hover {
+  background-color: rgb(47, 47, 168);
+}

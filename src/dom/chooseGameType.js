@@ -5,6 +5,7 @@ export default function chooseGameType() {
     const body = document.querySelector("body");
 
     const dialog = document.createElement("dialog");
+    dialog.classList.add("chooseGameType");
     dialog.innerHTML = `
     <div class="choices">
       <div class="choice friend">Play with friend</div>
