@@ -18,7 +18,7 @@ export default [
   { languageOptions: { globals: globals.browser } },
   ...compat.extends("airbnb"),
   {
-    ignores: ["node_modules", "dist"],
+    ignores: ["node_modules", "dist", "tests"],
   },
   eslintConfigPrettier,
   {
