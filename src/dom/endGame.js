@@ -1,11 +1,16 @@
 import victory from "../sounds/victory.mp3";
 import defeat from "../sounds/defeat.mp3";
 
-export default function endGame(player) {
+export default function endGame(player, soundStatus) {
   const body = document.querySelector("body");
 
   const victorySound = new Audio(victory);
   const defeatSound = new Audio(defeat);
+
+  if (soundStatus === "Unmute") {
+    victorySound.muted = true;
+    defeatSound.muted = true;
+  }
 
   if (player.name !== "computer") {
     victorySound.play();

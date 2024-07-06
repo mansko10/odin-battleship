@@ -15,4 +15,9 @@ export default function generateSinglePlayerTemplate(name) {
   boardsDiv.innerHTML = template;
 
   turnsDiv.insertAdjacentElement("afterend", boardsDiv);
+
+  const button = document.createElement("button");
+  button.classList.add("sound-button");
+  button.textContent = "Mute";
+  turnsDiv.insertAdjacentElement("afterend", button);
 }

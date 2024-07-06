@@ -11,6 +11,8 @@ const explosionSound = new Audio(explosion);
 const waterSplashSound = new Audio(waterSplash);
 
 export default function play(player, computer) {
+  const soundButton = document.querySelector(".sound-button");
+
   let turn = "player";
 
   const computerBoard = document.querySelector(".board.computer");
@@ -36,7 +38,7 @@ export default function play(player, computer) {
           displayPlayerBoard(player);
 
           if (player.gameboard.checkAllSunk()) {
-            endGame(computer);
+            endGame(computer, soundButton.textContent);
             return;
           }
 
@@ -69,7 +71,7 @@ export default function play(player, computer) {
         displayComputerBoard(computer);
 
         if (computer.gameboard.checkAllSunk()) {
-          endGame(player);
+          endGame(player, soundButton.textContent);
           return;
         }
 
@@ -80,5 +82,25 @@ export default function play(player, computer) {
     }
   }
 
+  function toggleSound() {
+    soundButton.addEventListener("click", () => {
+      if (soundButton.textContent === "Mute") {
+        soundButton.textContent = "Unmute";
+
+        cannonFireSound.muted = true;
+        explosionSound.muted = true;
+        waterSplashSound.muted = true;
+      } else {
+        soundButton.textContent = "Mute";
+
+        cannonFireSound.muted = false;
+        explosionSound.muted = false;
+        waterSplashSound.muted = false;
+      }
+    });
+  }
+
   computerBoard.addEventListener("click", attackComputerEvent);
+
+  toggleSound();
 }
