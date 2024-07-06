@@ -94,12 +94,14 @@ export default function play(player, computer) {
         cannonFireSound.muted = true;
         explosionSound.muted = true;
         waterSplashSound.muted = true;
+        waterSplashSound2.muted = true;
       } else {
         soundButton.textContent = "Mute";
 
         cannonFireSound.muted = false;
         explosionSound.muted = false;
         waterSplashSound.muted = false;
+        waterSplashSound2.muted = false;
       }
     });
   }
