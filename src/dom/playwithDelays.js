@@ -8,7 +8,10 @@ import explosion from "../sounds/explosion.mp3";
 
 const cannonFireSound = new Audio(cannonFire);
 const explosionSound = new Audio(explosion);
+
+//  Have to have two instances so that one can play while the other is also playing
 const waterSplashSound = new Audio(waterSplash);
+const waterSplashSound2 = new Audio(waterSplash);
 
 export default function play(player, computer) {
   const soundButton = document.querySelector(".sound-button");
@@ -66,7 +69,7 @@ export default function play(player, computer) {
         ) {
           explosionSound.play();
         } else {
-          waterSplashSound.play();
+          waterSplashSound2.play();
         }
 
         displayComputerBoard(computer);
