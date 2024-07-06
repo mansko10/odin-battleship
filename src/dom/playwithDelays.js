@@ -51,12 +51,13 @@ export default function play(player, computer) {
 
   function attackComputerEvent(e) {
     if (turn === "player") {
+      const { coordinates } = e.target.dataset;
+      const splitCoordinates = coordinates.split(",");
+      if (computer.gameboard.cellsHit.includes(coordinates)) return;
+
       computerBoard.removeEventListener("click", attackComputerEvent);
       cannonFireSound.play();
       setTimeout(() => {
-        const { coordinates } = e.target.dataset;
-        const splitCoordinates = coordinates.split(",");
-        if (computer.gameboard.cellsHit.includes(coordinates)) return;
         computer.gameboard.receiveAttack(coordinates);
 
         if (
