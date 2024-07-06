@@ -8,8 +8,8 @@ export default function chooseGameType() {
     dialog.classList.add("chooseGameType");
     dialog.innerHTML = `
     <div class="choices">
-      <div class="choice friend">Play with friend</div>
-      <div class="choice computer">Play with computer</div>
+    <div class="choice computer">Play with computer</div>
+    <div class="choice friend">Play with friend</div>
     </div>
   `;
 
